@@ -1,0 +1,55 @@
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    {% load static %}
+
+    body {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-form {
+      width: 400px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .login-form img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-form">
+      <img src="{% static 'images/img.jpg' %}" alt="School Logo">
+      <h2 class="text-center">Login</h2>
+      <form action="login.php" method="POST">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        
+        <div class="text-center">
+          <input type="submit" value="Login" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
