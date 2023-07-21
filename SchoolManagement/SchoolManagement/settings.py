@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'CustomUser',
     'Masters',
-    'Common'
+    'Common',
+    'ClassManagement'
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,6 @@ WSGI_APPLICATION = 'SchoolManagement.wsgi.application'
 
 AUTH_USER_MODEL = 'CustomUser.Users'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,7 +95,6 @@ DATABASES = {
         'PORT': '5432',
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
