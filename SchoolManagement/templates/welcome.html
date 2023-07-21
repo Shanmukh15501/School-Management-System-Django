@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to School Management System</title>
+  <style>
+    /* Add your custom CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .user-greeting {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .user-info {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logout-button {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to School Management System</h1>
+    <div class="user-greeting">
+      <h2>Hello, {{email}}</h2>
+      <!-- Replace [Username] with the actual username fetched from the backend -->
+    </div>
+    <div class="user-info">
+      <p>Welcome to our school management system. Here, you can access various features and functionalities to manage your school-related tasks.</p>
+      <!-- Add more information about the system or the user here -->
+    </div>
+    <div class="logout-button">
+      <a href="{% url 'logout' %}">Logout</a>
+      <!-- Replace "/logout" with the actual logout URL or endpoint -->
+    </div>
+  </div>
+</body>
+</html>

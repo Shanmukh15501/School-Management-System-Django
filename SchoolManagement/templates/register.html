@@ -1,80 +1,53 @@
+{% load i18n static %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration Form</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .image {
-      flex: 1;
-      padding: 20px;
-    }
-    .form {
-      flex: 1;
-      padding: 20px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .form-group button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .form-group button:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f5ff; /* Set blue background */
+        }
+        .container {
+            padding-top: 50px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="image">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header text-center bg-primary text-white">
+                        <h1>Registration Form</h1>
+                    </div>
+                    <div class="card-body">
+                        <form class="form" role="form" method="POST">
+                            {% csrf_token %}
+                            {{ form.as_ul }}
+                            {% if form.errors and not form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {% if form.errors.items|length == 1 %}{% translate "Please correct the error below." %}
+                                    {% else %}{% translate "Please correct the errors below." %}{% endif %}
+                                </div>
+                            {% endif %}
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>Issue with {{ field.label_tag }}</strong>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary px-4">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form">
-      <h2>Registration Form</h2>
-      <form>
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-          <label for="confirm-password">Confirm Password:</label>
-          <input type="password" id="confirm-password" name="confirm-password" required>
-        </div>
-        <div class="form-group">
-          <button type="submit">Register</button>
-        </div>
-      </form>
-    </div>
-  </div>
 </body>
 </html>
+{% endblock %}

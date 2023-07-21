@@ -38,7 +38,7 @@ class UserManager(BaseUserManager):
 
 USER_ROLE = (
    (1, 'Student'),
-   (2, 'Teacher'),
+   (2, 'Staff'),
    (3, 'Parent')
 )
 

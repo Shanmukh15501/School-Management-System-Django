@@ -49,8 +49,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/' , about,name='about'),
     path('contact/' , contact,name='contact'),
-     path('login/' , login,name='login'),
-     path('register/' , Register,name='register'),
+    path('login/' , login,name='login'),
+    path('register/' , Register,name='register'),
+    path('logout/',logout_view,name='logout')
+    
 
 
 ]
