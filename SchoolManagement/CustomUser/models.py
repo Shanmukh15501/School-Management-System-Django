@@ -13,7 +13,8 @@ from django.utils import timezone
 from django.db import models
 import datetime
 from Common.utils import getcode
-
+# from Masters.models import *
+from django.db.models.signals import post_save, post_delete
 
 class UserManager(BaseUserManager):
 
@@ -42,6 +43,14 @@ USER_ROLE = (
    (3, 'Parent')
 )
 
+section_choice = (
+    ("A","A"),
+    ("B","B"),
+    ("C","C")
+)
+
+sex_choice = (("Male","M"),("Female","F"),("Others","Others"))
+
 class Users(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(max_length=255, db_index=True, unique=True)
     phone = models.CharField(max_length=15, db_index=True, blank=True)
@@ -55,6 +64,10 @@ class Users(AbstractBaseUser,PermissionsMixin):
     department =  models.ForeignKey('Masters.Department', related_name='users', on_delete=models.RESTRICT, null=True, blank=True)
     designation =  models.ForeignKey('Masters.Designation', related_name='users', on_delete=models.RESTRICT, null=True, blank=True)
     role = models.SmallIntegerField( choices= USER_ROLE, blank=True, null=True, default=1)
+    standard = models.ForeignKey('ClassManagement.Class', related_name='users', on_delete=models.RESTRICT, null=True, blank=True)
+    section = models.CharField(max_length=2, choices=section_choice, default='A')
+    gender = models.CharField(max_length=50, choices=sex_choice, default='Male')
+    DOB = models.DateField(default='1998-01-01')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(default= datetime.datetime.now, blank=True)

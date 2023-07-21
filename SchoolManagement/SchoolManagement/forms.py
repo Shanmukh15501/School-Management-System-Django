@@ -10,7 +10,7 @@ from django.contrib.auth.forms import *
 class UserRegistrationForm(BaseUserCreationForm):
     class Meta:
         model=Users
-        fields=['email','phone','first_name','last_name','state','city','address','department','role','password1','password2']
+        fields=['email','phone','first_name','last_name','standard','section','gender','DOB','state','city','address','department','role','password1','password2']
 
 
 

@@ -5,6 +5,7 @@ import datetime
 from django.contrib.auth import get_user_model
 from django.db import models
 User = get_user_model()
+from ClassManagement.models import Subject,Class
 
 
 class State(models.Model):
@@ -125,3 +126,26 @@ class Designation(models.Model):
     
     def __str__(self):
         return str(self.name) + ' - ' + str(self.code)
+
+###-------------------
+sex_choice = (("Male","M"),("Female","F"),("Others","Others"))
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    class_id = models.ForeignKey(Class, on_delete=models.CASCADE, default=1)
+    name = models.CharField(max_length=200)
+    sex = models.CharField(max_length=50, choices=sex_choice, default='Male')
+    DOB = models.DateField(default='1998-01-01')
+
+    def __str__(self):
+        return self.name
+
+class Teacher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    dept = models.ForeignKey(Department, on_delete=models.CASCADE, default=1)
+    name = models.CharField(max_length=100)
+    sex = models.CharField(max_length=50, choices=sex_choice, default='Male')
+    DOB = models.DateField(default='1980-01-01')
+
+    def __str__(self):
+        return self.name
