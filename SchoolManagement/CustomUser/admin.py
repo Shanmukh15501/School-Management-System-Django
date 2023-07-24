@@ -46,11 +46,8 @@ class ImportMixinAdmin(ImportMixin):
 
 class UserAdmin(   admin.ModelAdmin):
     def get_list_display(self, request):
-        """
-        Return a sequence containing the fields to be displayed on the
-        changelist.
-        """
-        return self.list_display
+        model = self.model
+        return [field.name for field in model._meta.fields]
     
     def get_fields(self, request, obj=None):
 
@@ -58,7 +55,7 @@ class UserAdmin(   admin.ModelAdmin):
             return self.fields
         # _get_form_for_get_fields() is implemented in subclasses.
         form = self._get_form_for_get_fields(request, obj)
-        return [*form.base_fields, *self.get_readonly_fields(request, obj)]
+        return [*form.base_fields, *self.get_readonly_fields(request, obj),'groups']
 
 
 admin.site.register(Users,UserAdmin)

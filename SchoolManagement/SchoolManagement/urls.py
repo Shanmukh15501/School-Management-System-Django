@@ -47,13 +47,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about/' , about,name='about'),
-    path('contact/' , contact,name='contact'),
-    path('login/' , login,name='login'),
-    path('register/' , Register,name='register'),
-    path('logout/',logout_view,name='logout')
-    
-
+    path('users/', include('CustomUser.urls')),
 
 ]
 
