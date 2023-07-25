@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Complaint Form</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    
+    /* Center align the top navigation */
+    .topnav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      width: 200px;
+      border: #333;
+      background-color: #f8f9fa; /* Set background color */
+      border-radius: 10px;
+    }
+
+    /* Style the top navigation links */
+    .topnav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #333; /* Set link color */
+    }
+
+    /* Style the active link */
+    .topnav a.active {
+      font-weight: bold;
+      color: #0069d9; /* Set active link color */
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .image {
+      flex: 1;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="form">
+      <h2 class="text-center">Complaint Form</h2>
+    <hr/>
+        <div class="topnav">
+            <a href="{% url 'viewComplaint' %}">My Complaints</a>
+        </div>
+      <div class="row">
+        <div class="col-sm-8">
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{forms.as_p}}
+          <input type="submit" class="btn btn-success" value="Submit Complaint">
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

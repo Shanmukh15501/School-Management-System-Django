@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)http://127.0.0.1:8000/complaint/?name=Hemang+afm&email=123%40gm.com&area=Student -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Complaint Form</title>
+  <style>
+    
+    /* Center align the top navigation */
+    .topnav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      background-color: #f8f9fa; /* Set background color */
+    }
+
+    /* Style the top navigation links */
+    .topnav a {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #333; /* Set link color */
+    }
+
+    /* Style the active link */
+    .topnav a.active {
+      font-weight: bold;
+      color: #0069d9; /* Set active link color */
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .image {
+      flex: 1;
+      padding: 20px;
+    }
+    .form {
+      flex: 1;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image">
+    </div>
+    <div class="form">
+        
+      <h2>Complaint Form</h2>
+    <hr>
+        <div class="topnav">
+            <a class="active" href="http://127.0.0.1:8000/complaint/?name=Hemang+afm&amp;email=123%40gm.com&amp;area=Student#home">My Complaint</a>
+            <a href="http://127.0.0.1:8000/about/">New Complaint</a><a>
+        </a></div><a>
+      <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="vx3BOuBcgbgTEcKk1BIBeXT6ASxK9ASQ1jvc1fN5agq2MvvVM57BT9MPn80jssVz">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required="">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required="">
+        </div>
+        <div class="form-group">
+            <label for="Complaint against"><b>Complaint against</b></label>
+            <select id="area" name="area">
+            <option value="----">----</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            </select>
+        </div>
+        <div class="form-group">
+        <label for="subject"><b>Complaint Details:</b></label>
+        <textarea class="form-control" id="textAreaExample6" rows="5" placeholder="Enter your complaint details......."></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit">Submit Complaint</button>
+        </div>
+      </form>
+    </a></div><a>
+  </a></div><a>
+
+
+</a></body></html>
