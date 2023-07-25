@@ -7,8 +7,14 @@ from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib import messages
 from CustomUser.models import Users
+from CustomUser.serializers import UserCommonSerializer
 from SchoolManagement.forms import UserAuthenticationForm
 from django.contrib.auth.decorators import login_required
+from rest_framework import permissions
+from rest_framework import generics, status, permissions
+
+
+
 
 
 from SchoolManagement.forms import UserRegistrationForm
@@ -129,3 +135,19 @@ def chatPage(request, *args, **kwargs):
         return redirect("login")
     context = {}
     return render(request, "chat.html", context)
+
+
+class IamUserDetails(generics.RetrieveAPIView):
+    permission_classes =[permissions.AllowAny]
+    serializer_class = UserCommonSerializer
+    queryset = User.objects.all()
+
+    def get_object(self):
+        # Get the 'id' value from the URL parameters
+        id_value = self.kwargs.get('id')
+
+        # Use the 'id' value to retrieve the user object
+        obj = User.objects.get(pk=id_value)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
