@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'CustomUser',
     'Masters',
     'Common',
-    'ClassManagement'
+    'ClassManagement',
+    'Complaints'
 ]
 
 MIDDLEWARE = [
@@ -90,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "School_MS",
         'USER': "postgres",
-        'PASSWORD': "1234",
+        'PASSWORD': "postgres",
         'HOST': "localhost",
         'PORT': '5432',
     },

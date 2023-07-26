@@ -32,9 +32,15 @@
     /* Additional CSS styles go here */
 
     /* Center align the top navigation */
+    .main{
+      display: flex;
+      flex-direction: row;
+    }
     .topnav {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      width: 20px;
+      /* justify-content: center; */
       margin-bottom: 20px;
       background-color: #f8f9fa; /* Set background color */
     }
@@ -57,26 +63,145 @@
       width: 100%;
       height: auto;
     }
-
     /* Style the h1 heading */
     h1 {
       text-align: center;
       color: #333; /* Set heading color */
     }
+    .containerbody {
+      display: flex;
+      min-height: 100%;
+    }
+    
+    .navbar_heading {
+      background: #eee;
+      padding: 90px 108px;
+      text-align: left;
+      transition: transform .3s;
+      box-shadow: 0 0 5px black;
+      transform: translate3d(0, 0, 0);
+      flex: 1;
+    }
+    input[data-function*='swipe'] {
+      opacity: 0;
+      position: absolute;
+    }
+    label[data-function*='swipe'] {
+      font: 42px fontawesome;
+      text-align: center;
+      position: absolute;
+      cursor: pointer;
+      color: #808288;
+      top: 30px;
+      left: 30px;
+      width: 42px;
+      height: 42px;
+      transform: translate3d(0, 0, 0);
+      transition: transform .3s;
+      z-index: 1;
+      display: block;
+    }
+    label[data-function*='swipe']:hover {
+      color: #263249;
+    }
+    input[data-function*='swipe']:checked ~ label[data-function*='swipe'] {
+      transform: translate3d(280px, 0, 0);
+    }
+    label[data-function*='swipe']:checked {
+      display: block;
+    }
+    label:nth-child(2){
+      display: none;
+    }
+    input[data-function*='swipe']:checked ~ label:nth-child(2){
+      display: block;
+      transform: translate3d(280px, 0px, 0px);
+    }
+    input[data-function*='swipe']:checked ~ label:nth-child(3){
+      display: none;
+    }
+    
+    input[data-function*='swipe']:checked ~ .navbar_heading{
+      transform: translate3d(280px, 0px, 0px);
+    }
+    input[data-function*='swipe']:checked ~ .leftsidebar {
+      transform: translate3d(0px, 0px, 0px);
+    }
+    input[data-function*='swipe']:checked ~ .leftsidebar .menubar li {
+      width: 100%;
+    }
+    .leftsidebar {
+      top: 0px;
+      width: 277px;
+      /* background: #4b4c50; */
+      color: #eee;
+      left: 0;
+      height: 100%;
+      transform: translate3d(-280px, 0px, 0px);
+      transition: all .3s;
+      position: absolute;
+      
+    }
+    .menubar li {
+      width: 0%;
+      padding: 25px 0px 0px 0px;
+      list-style: none;
+    }
+    .menubar li a {
+      font-size: 18px;
+      text-align: center;
+      color: #fff;
+      font-weight: 900;
+      border: 1px solid #fff;
+      padding: 5px 0px 5px 0;
+      margin: 0 20px;
+      display: block;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    
+    .titlebar{
+      color: #fff;
+      font-weight: 900;
+      display: block;
+      text-align: center;
+    }
+    .menubar li a:hover{
+      background: #0044ff;
+      color: #fff;
+    
+    }
+    .menubar li a:active {
+      background-color: #0044ff;
+    }
   </style>
 </head>
 
 <body>
-  <h1>School Management</h1>
-  <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="{% url 'about' %}">About</a>
-    <a href="{% url 'contact' %}">Contact</a>
-    <a href="{% url 'login' %}">login</a>
-    <a href="{% url 'register' %}">register</a>
-
-
+  <h1>School Management</h1> 
+  <div class="main">
+  <div class="menu" style="background-color: #808288;">
+  <input data-function="swipe" id="swipe" type="checkbox">
+  <label data-function="swipe" for="swipe"><img class="img-unchecked" src="{% static '/images/img3.png' %}" alt="Image 3" width="16px" height="auto" style="height: 30px; width: auto;"></label>
+  <label data-function="swipe" for="swipe"><img class="img-unchecked" src="{% static '/images/img3.png' %}" alt="Image 3" width="16px" height="auto" style="height: 30px; width: auto;"></label>
+ 
+  <!-- <div class="navbar_heading">
+    <img src="{% static '/images/img3.png' %}" alt="Image 3"  style="height: 30px; width: auto;">
+  </div> -->
+  <div class="leftsidebar">
+    <div style="background: #4b4c50; height: 100%;">
+    <nav class="menubar">
+    <li class="titlebar"><h3>Menu</h3></li>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+    <li><a href="{% url 'login' %}">login</a></li>
+    <li><a href="{% url 'register' %}">register</a></li>
+    </nav>
+    </div>
   </div>
+  </div>
+  
   <style>
     .image-container {
         display: flex;
@@ -100,13 +225,15 @@
       background-color: #f2f2f2;
   }
 </style>
-
+<div class="container">
 <div class="image-container">
     <img src="{% static '/images/img1.jpg' %}" alt="Image 1">
     <img src="{% static '/images/img.jpg' %}" alt="Image 2">
 </div>
 <div class="footer">
   <p>Copyright © 2023. ZP  Model Schools. All reserved!</p>
+</div>
+</div>
 </div>
   <!-- Your content goes here -->
 
