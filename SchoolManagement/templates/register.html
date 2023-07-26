@@ -25,7 +25,7 @@
                     <div class="card-body">
                         <form class="form" role="form" method="POST">
                             {% csrf_token %}
-                            {{ form.as_ul }}
+                            {{ form.as_p }}
                             {% if form.errors and not form.non_field_errors %}
                                 <div class="alert alert-danger">
                                     {% if form.errors.items|length == 1 %}{% translate "Please correct the error below." %}
