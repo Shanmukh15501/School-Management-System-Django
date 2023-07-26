@@ -26,12 +26,14 @@ SECRET_KEY = 'django-insecure-@$0unlmvvn^zo=8m+@nl8a))t^ugw8qwo6-z#1kbzj4gc@)v3(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
+AUTHENTICATION_BACKENDS = ('Common.Authentication.CustomAuthenticationBackend',)
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +44,9 @@ INSTALLED_APPS = [
     'Masters',
     'Common',
     'ClassManagement',
-    'Complaints'
+    'Complaints',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 ROOT_URLCONF = 'SchoolManagement.urls'
 
@@ -78,7 +84,45 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = 'SchoolManagement.wsgi.application'
+ASGI_APPLICATION = 'SchoolManagement.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis-13646.c212.ap-south-1-1.ec2.cloud.redislabs.com:13646", 13646)],
+        },
+    },
+}
+
+
+
+
+
+# settings.py
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [
+                # Replace with your Redis server details
+                {
+                    'address': 'redis://username:password@endpointurl:port'
+                },
+            ],
+        },
+    },
+}
+
+
+
+
+
+
+
+
+
 
 
 # Database
@@ -91,7 +135,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "School_MS",
         'USER': "postgres",
-        'PASSWORD': "postgres",
+        'PASSWORD': "1234",
         'HOST': "localhost",
         'PORT': '5432',
     },
@@ -144,7 +188,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTHENTICATION_BACKENDS = ('Common.Authentication.CustomAuthenticationBackend',)
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'                                   
