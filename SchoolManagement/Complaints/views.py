@@ -16,6 +16,7 @@ def newComplaint(request):
             obj.save()
             # to reset form
             form = ComplaintForm()
+            return HttpResponseRedirect('/users/login/')
     else:
         form = ComplaintForm()
     return render(request, 'complaint.html', {'forms': form })
@@ -40,10 +41,11 @@ def editComplaint(request, id):
         form = ComplaintForm(request.POST, instance=obj)
         if form.is_valid():
             form.save()
-            complaints = ComplaintsData.objects.all()
-            return render(request, 'viewComplaint.html', {'complaints': complaints})
+            return HttpResponseRedirect('/complaint/view')
+        else:
+            form = ComplaintForm(instance=obj)
+        return render(request, 'editComplaint.html', {'forms':form})
     elif request.method == 'GET':
-        obj = ComplaintsData(name=request.get("name"))
-        # obj = ComplaintsData.objects.get(pk=id)
+        obj = ComplaintsData.objects.get(pk=id)
         form = ComplaintForm(instance=obj)
     return render(request, 'editComplaint.html', {'forms':form})

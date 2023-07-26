@@ -12,11 +12,11 @@ class CustomAuthenticationBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None):
         try:
 
-            user = User.objects.get(Q(email=username))
+            user = User.objects.get(Q(email=username),Q(is_active=True))
             if password != None:
                 pwd_valid = user.check_password(password)
                 if pwd_valid:
                     return user
             return None
         except Exception as e:
-            raise e
+            return None

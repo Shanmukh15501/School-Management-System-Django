@@ -12,6 +12,10 @@ from SchoolManagement.forms import UserAuthenticationForm
 from django.contrib.auth.decorators import login_required
 from rest_framework import permissions
 from rest_framework import generics, status, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+
 
 
 
@@ -70,25 +74,28 @@ def loginView(request):
       
 
         if user:
-            has_permission = user.has_perm('admin.view_logentry')
+            # has_permission = user.has_perm('admin.view_logentry')
             context = {
                 'email': email,
-            'has_permission': has_permission,
             }
             
             request.session['email'] =  user.email
             request.session['role'] =  user.role
             
-
-            return render(request, 'welcome.html', {'context': context})
+            print("context",context)
+            return render(request, 'welcome.html',context)
         else:
             return render(request, 'login.html', {'form': form})
 
     elif request.method == 'GET':
+         print(" request.session",request.session)
          if 'email' in request.session:
+             
              print(request.user)
-             print(request.GET.get("user"))
-             return render(request, 'welcome.html')
+             context = {
+                'email': request.session['email'],
+            }
+             return render(request, 'welcome.html',context)
          else:
             return render(request, 'login.html', {'form': form})
 
@@ -151,3 +158,27 @@ class IamUserDetails(generics.RetrieveAPIView):
         self.check_object_permissions(self.request, obj)
         return obj
 
+
+
+class UserActive_Inactive(APIView):
+
+    permission_classes = [permissions.AllowAny]
+    
+    def post(self, request,*args, **kwargs):
+        id = kwargs['id']
+        try:
+            user = User.objects.get(id=id)
+            if user.is_active:
+                user.is_active=False
+                user.save()
+                return Response({"user":' User Inactivated'}, status=status.HTTP_200_OK)
+            else:
+                 
+                user.is_active=True
+                user.save()
+                return Response({"user":' User Activated'}, status=status.HTTP_200_OK)
+
+         
+
+        except User.DoesNotExist:
+            return Response({"user":'user does not exists'}, status=status.HTTP_200_OK)

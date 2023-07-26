@@ -18,7 +18,8 @@
 	<br />
 	</div>
 	<script>
-	const chatSocket = new WebSocket("ws://" + window.location.host + "/");
+	const chatSocket = new WebSocket("ws://" + window.location.host + "/test/");
+	console.log("chatSocket",chatSocket)
 	chatSocket.onopen = function (e) {
 		console.log("The connection was setup successfully !");
 	};
@@ -35,7 +36,7 @@
 		var messageInput = document.querySelector(
 		"#id_message_send_input"
 		).value;
-		chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.username}}"}));
+		chatSocket.send(JSON.stringify({ message: messageInput, username : "{{request.user.email}}"}));
 	};
 	chatSocket.onmessage = function (e) {
 		const data = JSON.parse(e.data);

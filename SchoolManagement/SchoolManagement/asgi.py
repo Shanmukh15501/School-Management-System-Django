@@ -10,13 +10,21 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "SchoolManagement.settings")
 # is populated before importing code that may import ORM models.
 django_asgi_app = get_asgi_application()
 
-import CustomUser.routing
+import CustomUser.routing as routing
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ChatApp.settings')
+
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter , URLRouter
 
 application = ProtocolTypeRouter(
-    {
-        "http": django_asgi_app,
-        "websocket": AllowedHostsOriginValidator(
-            AuthMiddlewareStack(URLRouter(CustomUser.routing.websocket_urlpatterns))
-        ),
-    }
+	{
+		"http" : get_asgi_application() ,
+		"websocket" : AuthMiddlewareStack(
+			URLRouter(
+				routing.websocket_urlpatterns
+			)
+		)
+	}
 )

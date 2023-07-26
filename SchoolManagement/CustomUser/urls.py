@@ -41,7 +41,8 @@ urlpatterns = [
     path('imuser/',selfuserdetails,name='selfdetails'),
     path('chat/',chatPage,name='chating'),
     path('myview/',my_view,name='my_view'),
-     path('iamuser/<int:id>/', IamUserDetails.as_view(), name='iamuser'),
+    path('iamuser/<int:id>/', IamUserDetails.as_view(), name='iamuser'),
+    path('userstat/<int:id>', UserActive_Inactive.as_view()),
 
 
     
