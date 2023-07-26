@@ -55,7 +55,7 @@ class UserAdmin(   admin.ModelAdmin):
             return self.fields
         # _get_form_for_get_fields() is implemented in subclasses.
         form = self._get_form_for_get_fields(request, obj)
-        return [*form.base_fields, *self.get_readonly_fields(request, obj),'groups','id']
+        return [*form.base_fields, *self.get_readonly_fields(request, obj),'groups']
 
 
 admin.site.register(Users,UserAdmin)

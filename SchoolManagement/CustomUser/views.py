@@ -59,8 +59,7 @@ def contact(request):
 
 def loginView(request):
     form = UserAuthenticationForm()
-    if request.user.is_authenticated:
-        pass
+
     if request.method == 'POST':
 
 
@@ -70,10 +69,9 @@ def loginView(request):
         email = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(request, username=email, password=password)
-        login(request, user)
       
-
         if user:
+            login(request, user)
             # has_permission = user.has_perm('admin.view_logentry')
             context = {
                 'email': email,
@@ -85,7 +83,7 @@ def loginView(request):
             print("context",context)
             return render(request, 'welcome.html',context)
         else:
-            return render(request, 'login.html', {'form': form})
+            return render(request, 'login.html',{'form':form})
 
     elif request.method == 'GET':
          print(" request.session",request.session)
