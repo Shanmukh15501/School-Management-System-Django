@@ -34,6 +34,8 @@ from .views import *
 urlpatterns = [
 
     path('about/' , about,name='about'),
+    path('profile/' , profile,name='profile'),
+
     path('contact/' , contact,name='contact'),
     path('login/' , loginView,name='login'),
     path('register/' , Register,name='register'),

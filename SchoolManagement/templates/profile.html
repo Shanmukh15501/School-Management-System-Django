@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>User Information</h2>
+        <table class="table table-bordered">
+            <tbody id="user-info">
+                <!-- Data will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Function to fetch data from the API
+        async function fetchUserData() {
+            var abc = {{obj.id}}
+            console.log("abc",abc)
+            try {
+                const response = await fetch('http://127.0.0.1:8000/users/iamuser/' + abc + '/');
+                console.log("response",response)
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                return null; // Return null if there's an error or data is not available
+            }
+        }
+
+        // Function to render the user information in HTML
+        async function renderUserInfo() {
+            const userInfoTable = document.getElementById('user-info');
+            const userData = await fetchUserData();
+
+            if (userData) {
+                // Create and populate table rows with user information
+                const emailRow = document.createElement('tr');
+                emailRow.innerHTML = `
+                    <th>Email</th>
+                    <td>${userData.email || ''}</td>
+                `;
+
+                const phoneRow = document.createElement('tr');
+                phoneRow.innerHTML = `
+                    <th>Phone</th>
+                    <td>${userData.phone || ''}</td>
+                `;
+
+                const roleRow = document.createElement('tr');
+                roleRow.innerHTML = `
+                    <th>Role</th>
+                    <td>${userData.role || ''}</td>
+                `;
+
+                const cityRow = document.createElement('tr');
+                cityRow.innerHTML = `
+                    <th>City</th>
+                    <td>${userData.city ? userData.city.name : ''}</td>
+                `;
+
+                // Append rows to the table body
+                userInfoTable.appendChild(emailRow);
+                userInfoTable.appendChild(phoneRow);
+                userInfoTable.appendChild(roleRow);
+                userInfoTable.appendChild(cityRow);
+            }
+        }
+
+        // Call the function to render user information
+        renderUserInfo();
+    </script>
+
+    <!-- Add Bootstrap JS and jQuery scripts (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

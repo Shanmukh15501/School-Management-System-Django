@@ -49,6 +49,10 @@ def about(request):
  
     return render(request, 'about.html')
 
+def profile(request):
+    obj = request.user
+ 
+    return render(request, 'profile.html',{'obj':obj})
 
 
 def contact(request):

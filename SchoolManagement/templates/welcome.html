@@ -54,9 +54,9 @@
 </head>
 <body>
     <div class="sidenav">
-      {% if perms.admin.view_logentry %}
-        <a href="#">Profile</a>
-      {% endif %}
+      {% comment %} {% if perms.admin.view_logentry %} {% endcomment %}
+        <a href="{% url 'profile' %}">Profile</a>
+      {% comment %} {% endif %} {% endcomment %}
  
     <a href="#}">Attendance</a>
     <a href="#">Reports</a>
